@@ -1,0 +1,15 @@
+Question 1 :
+Dvector x; x = Dvector (3, 1.);
+Cette ligne instancie la classe Dvector en un objet x construit à l'aide du constructeur par defaut Dvector::Dvector();, puis affecte à l'objet x (à l'aide de l'operateur =) un nouvel objet instanciation de la classe Dvector qui est construit à l'aide du constructeur Dvector::Dvector(int taille, double arg = 0.0);
+Dvector x = Dvector(3,1.); 
+Construit x lors de l'instanciation de la classe Dvector directement avec le constructeur implémenté en un vecteur de taille 3 initialisé à la valeur 1.0.
+
+Le src/bin/main06 illustre ces deux cas de figures, leur implementation se trouve dans src/src/main06.cpp
+Question 2 :
+Les programmes de tests sont appelé mainX.cpp où X est un entier naturel.
+
+Question 3 :
+C'est fait.
+
+Question 4 :
+C'est fait.
