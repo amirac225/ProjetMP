@@ -5,6 +5,12 @@
 
 /* Les Constructeurs : */
 
+/* Constructeur par défaut surchargé */
+Dvector::Dvector() : Darray()
+{
+
+}
+
 /* Initialisation d'un vecteur à partir d'un fichier se trouvant à str */
 Dvector::Dvector(std::string const& str) : Darray(str)
 {
@@ -37,6 +43,5 @@ double operator*(Dvector const& dvector1, Dvector const& dvector2)
 /* Destructeur */
 Dvector::~Dvector()
 {
-    std::cout << "Destruction du vecteur" << std::endl;
-    delete [] m_double;
+ //   std::cout << "Destruction du vecteur" << std::endl;
 }

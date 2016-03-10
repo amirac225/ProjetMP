@@ -10,6 +10,10 @@
 class Dvector : public Darray 
 {
 	public : 
+    /** Constructeur par defaut surchargé. \n
+        Initialise la taille et le pointeur à 0.
+    */
+    Dvector();
 /** Constructeur qui permet d'initialiser un vecteur de taille 'taille' dont les coordonnées sont toutes égales à arg.  
     */
     Dvector(int taille, double arg = 0.0);

@@ -8,14 +8,14 @@
 /* Constructeur par défaut surchargé */
 Darray::Darray() : m_double(0), m_taille(0)
 {
-    std::cout << "Appel du constructeur par defaut" << std::endl;
+    //std::cout << "Appel du constructeur par defaut" << std::endl;
     m_double = new double[m_taille];
 }
 
 /* Initialisation d'un vecteur à partir d'un fichier se trouvant à str */
 Darray::Darray(std::string const& str) : m_double(0), m_taille(0)
 {
-    std::cout << "Appel du constructeur faisant appel au fichier " << str << std::endl;
+    //std::cout << "Appel du constructeur faisant appel au fichier " << str << std::endl;
     /* Ouverture du fichier */
     std::ifstream file(str.c_str());
     if(file)
@@ -43,12 +43,12 @@ Darray::Darray(std::string const& str) : m_double(0), m_taille(0)
     {
         m_double = new double[m_taille]; 
     }
-}
+} 
 /* Initialisation d'un vecteur à partir d'une taille et d'un argument facultatif */
 /* Necessite que taille >= 0 */
 Darray::Darray(int taille, double arg) : m_double(0), m_taille(taille)
 {
-    std::cout << "Appel du constructeur initialisant à partir d'une taille et d'un argument " << std::endl;
+    //std::cout << "Appel du constructeur initialisant à partir d'une taille et d'un argument " << std::endl;
     m_double = new double[m_taille];
     for(int i = 0; i < m_taille; i++)
     {
@@ -59,7 +59,7 @@ Darray::Darray(int taille, double arg) : m_double(0), m_taille(taille)
 /* Surcharge du constructeur de recopie */
 Darray::Darray(Darray const& dvector) : m_double(0), m_taille(dvector.m_taille)
 {
-    std::cout << "Appel du constructeur de recopie " << std::endl;
+    //std::cout << "Appel du constructeur de recopie " << std::endl;
     m_double = new double[m_taille];
     for(int i = 0; i < m_taille; i++)
     {

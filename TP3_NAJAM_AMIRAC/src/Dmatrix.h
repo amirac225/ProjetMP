@@ -12,6 +12,10 @@ class Dmatrix : public Darray{
   int m ;
   int n ;
  public :
+         /** Constructeur par defaut surchargé. \n
+            Initialise la taille et le pointeur à 0.
+        */
+        Dmatrix();
   /** Constructeur qui permet d'initialiser une matric de taille nb_lines * nb_col dont les coordonnées sont toutes égales à arg.  
         */
   Dmatrix(int nb_lines, int nb_col, double arg = 0.0);
@@ -87,6 +91,6 @@ class Dmatrix : public Darray{
 
 };
 
-	Dmatrix operator * (Dmatrix const &matrix1 ,Dmatrix const & matrix2) ;
+	Dmatrix operator * (Dmatrix const& matrix1 ,Dmatrix const& matrix2) ;
 	Dvector operator * (Dmatrix const& matrix, Dvector const& vector) ;
 #endif // DMATRIX_H

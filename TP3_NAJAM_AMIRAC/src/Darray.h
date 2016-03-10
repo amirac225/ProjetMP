@@ -30,7 +30,7 @@ class Darray
 	   Surcharge de l'operateur d'affectation
 	   @param le vecteur qu'on veut affecté
 	 */
-        Darray& operator=(Darray const& dvector);
+        virtual Darray& operator=(Darray const& dvector);
 	/**
 	   Surcharge de l'operateur +=
 	   On ajoute le vecteur passé en paramétre avec
@@ -70,8 +70,8 @@ class Darray
 	   Surcharge de l'opérateur d'accession 
 	   @param l'indice de la coordonnée à laquelle on veut accéder
 	 */
-	double& operator()(int i);
-    double const& operator()(int i) const;
+	virtual double& operator()(int i);
+    virtual double const& operator()(int i) const;
         /** Methode qui modifie la taille du vecteur en question 
         */
         void resize(int const& taille, double const& init = 0);

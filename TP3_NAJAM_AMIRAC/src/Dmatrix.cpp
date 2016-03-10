@@ -5,6 +5,7 @@
 #include "Dmatrix.h"
 #include "Dvector.h"
 #include <cassert>
+#include <iostream> // a enleveeeeeeeeeer
 
 /* Les Constructeurs : */
 
@@ -23,20 +24,26 @@ Dmatrix::Dmatrix(Dmatrix const& dmatrix) : Darray(dmatrix)
   n = dmatrix.n ; 
 }
 
+/* Surcharge du constructeur par default */
+Dmatrix::Dmatrix() : Darray(), m(0), n(0)
+{
+
+}
+
 
 /* Destructeur */
 Dmatrix::~Dmatrix()
 {
-    std::cout << "Destruction de la matrice" << std::endl;
-    delete [] m_double;
+ //   std::cout << "Destruction de la matrice" << std::endl;
+//    delete [] m_double;
 }
 
 Dvector operator * (Dmatrix const &matrix, Dvector const& vector){
-  assert(matrix.lines() == vector.size()) ; 
+  assert(matrix.columns() == vector.size()) ; 
 
   // Dvector vect = Dvector(m,0) ;
   // for (int i = 0; i < n ; i++){
-  //   for (int j = 0 ; j < m; j++){
+  //   for (int j = 0 ; j < m; j++){ 
   //     vect(i) += (*this)(i,j) * vector(j) ;
   //   }
   // }
@@ -47,38 +54,39 @@ Dvector operator * (Dmatrix const &matrix, Dvector const& vector){
   return vect ; 
 }
 
-
+/* /!\ Operateur de cast non surchargé */
 double & Dmatrix::operator() (int i , int j){
-  return (*(Darray *)this)(j + i*n) ;
+	return Darray::operator()(j + i*n);
 }
 
+/* /!\ Operateur de cast non surchargé */
 const double & Dmatrix::operator() (int i , int j) const{
-  return (*(Darray *)this)(j + i*n) ;
+	return Darray::operator()(j + i*n);
 }
 
 Dvector Dmatrix::line (int pos) const{
   assert (pos >= 0 && pos < m) ;
-  Dvector line (n, 0) ;
-  for (int j = 0 ; j < m ; j++){
+  Dvector line (n, 0.) ;
+  for (int j = 0 ; j < n ; j++){
     line(j) = (*this)(pos, j) ;
   }
   return line ;
 }
 
 Dvector Dmatrix::column (int pos) const {
-  assert(pos >= 0 && pos < m);
-  Dvector column (n, 0) ;
-  for (int i = 0; i < n; i++){
+  assert(pos >= 0 && pos < n);
+  Dvector column (m, 0.) ;
+  for (int i = 0; i < m; i++){
     column(i) = (*this)(i,pos) ;
   }
   return column ;
 }
 
-Dmatrix operator * (Dmatrix const &matrix1, Dmatrix const & matrix2) {
+Dmatrix operator * (Dmatrix const& matrix1, Dmatrix const& matrix2) {
   assert(matrix1.columns() == matrix2.lines()) ; 
   Dmatrix mat = Dmatrix(matrix1.lines(), matrix2.columns(), 0) ; 
   for (int i = 0 ; i < matrix1.lines() ; i++){
-    for (int j =0 ; j < matrix2.lines() ; j++){
+    for (int j =0 ; j < matrix2.columns() ; j++){
       mat(i,j) = matrix1.line(i) * matrix2.column(j) ;
     }
   }
@@ -87,15 +95,10 @@ Dmatrix operator * (Dmatrix const &matrix1, Dmatrix const & matrix2) {
 
 
 Dmatrix& Dmatrix::operator = (Dmatrix const & matrix){
- if (this != &matrix){
-   m = matrix.m ;
-   n = matrix.n ;
-   m_taille = n * m ;
-   delete[] m_double ;
-   m_double = new double[n*m] ; 
-   memcpy(m_double, matrix.m_double, m_taille*sizeof(double)) ;
- }
- return *this ; 
+ m = matrix.m;
+ n = matrix.n;
+ Darray::operator=(matrix);
+ return *this;
 } 
 
 
