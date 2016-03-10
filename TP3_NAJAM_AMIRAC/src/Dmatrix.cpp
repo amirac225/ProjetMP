@@ -94,6 +94,7 @@ Dmatrix& Dmatrix::operator = (Dmatrix const & matrix){
    delete[] m_double ;
    m_double = new double[n*m] ; 
    memcpy(m_double, matrix.m_double, m_taille*sizeof(double)) ;
+    
  }
  return *this ; 
 } 
