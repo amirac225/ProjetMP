@@ -5,6 +5,7 @@
 #include "Dmatrix.h"
 #include "Dvector.h"
 #include <cassert>
+#include <iostream> // a enleveeeeeeeeeer
 
 /* Les Constructeurs : */
 
@@ -33,10 +34,19 @@ Dmatrix::Dmatrix() : Darray(), m(0), n(0)
 /* Destructeur */
 Dmatrix::~Dmatrix()
 {
+ //   std::cout << "Destruction de la matrice" << std::endl;
+//    delete [] m_double;
 }
 
 Dvector operator * (Dmatrix const &matrix, Dvector const& vector){
   assert(matrix.columns() == vector.size()) ; 
+
+  // Dvector vect = Dvector(m,0) ;
+  // for (int i = 0; i < n ; i++){
+  //   for (int j = 0 ; j < m; j++){ 
+  //     vect(i) += (*this)(i,j) * vector(j) ;
+  //   }
+  // }
   Dvector vect = Dvector(matrix.lines(),0) ; 
   for (int i = 0; i < matrix.lines(); i++){
     vect(i) += matrix.line(i) * vector ;
@@ -44,10 +54,12 @@ Dvector operator * (Dmatrix const &matrix, Dvector const& vector){
   return vect ; 
 }
 
+/* /!\ Operateur de cast non surchargé */
 double & Dmatrix::operator() (int i , int j){
 	return Darray::operator()(j + i*n);
 }
 
+/* /!\ Operateur de cast non surchargé */
 const double & Dmatrix::operator() (int i , int j) const{
 	return Darray::operator()(j + i*n);
 }
@@ -110,5 +122,6 @@ Dmatrix& Dmatrix::transpose() {
       (*this)(j,i) = a ;
     }
   }
+ 
   return *this ;
 }
