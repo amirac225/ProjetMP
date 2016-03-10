@@ -12,7 +12,7 @@ all : $(OBJ) bin
 
 bin : $(BIN)
 
-bin/main% : obj/Darray.o  obj/main%.o
+bin/main% : obj/Darray.o obj/Dvector.o obj/Dmatrix.o obj/main%.o
 	$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)
 
 obj/%.o : %.cpp
