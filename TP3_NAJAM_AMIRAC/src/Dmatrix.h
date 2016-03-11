@@ -83,12 +83,18 @@ class Dmatrix : public Darray{
 	   @return le coefficient (i,j) de la matrice. 
 	**/
 	const double& operator() (int i, int j) const ;
+
 	/** 
 	    @brief Transposition d'une matrice carrée
 	    @return Matrice transposée
 	**/
-	Dmatrix & transpose() ; 
+	Dmatrix & transpose() ;
 
+	/** 
+	    @brief Effectue la factorisation de Cholesky d'une matrice A SDP
+	    @return La matrice triangulaire L telle que A = L*transposée(T) 
+	**/
+	Dmatrix  cholesky() ; 
 };
 
 	Dmatrix operator * (Dmatrix const& matrix1 ,Dmatrix const& matrix2) ;

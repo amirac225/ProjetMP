@@ -5,7 +5,8 @@
 #include "Dmatrix.h"
 #include "Dvector.h"
 #include <cassert>
-
+#include <cmath>
+#include <iostream>
 /* Les Constructeurs : */
 
 /* Initialisation d'un vecteur à partir d'une taille et d'un argument facultatif */
@@ -111,4 +112,30 @@ Dmatrix& Dmatrix::transpose() {
     }
   }
   return *this ;
+}
+
+Dmatrix Dmatrix::cholesky(){
+  assert(n == m) ;
+  assert(*this == this->transpose()) ; 
+  Dmatrix matrix = Dmatrix (n,n, 0.0) ;
+  Dvector vectork = Dvector(n, 0.0) ;
+  Dvector vectori = Dvector(n, 0.0) ;
+  for (int k = 0 ; k <=  n-1 ; k++){
+    vectork = matrix.line(k) ;
+    for (int i = k ; i < n ; i++){
+      vectork(i) = 0.0 ;
+    }
+    assert((*this)(k,k) - vectork*vectork >= 0.0) ; 
+    matrix(k,k) = sqrt((*this)(k,k) - vectork*vectork) ;
+    for (int i = k+1 ; i <= n-1 ; i++){
+      vectori = matrix.line(i) ;
+      for (int j = k; j < n ; j++){
+	vectori(j) = 0.0 ;
+      }
+      assert(matrix(k,k) != 0.0) ; 
+      matrix(i,k) = ((*this)(i,k) - vectori*vectork) / matrix(k,k) ;
+    }
+  }
+  //assert(matrix*matrix.transpose() == *this) ;
+  return matrix ;
 }
