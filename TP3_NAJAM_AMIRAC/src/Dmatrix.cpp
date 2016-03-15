@@ -7,6 +7,7 @@
 #include <cassert>
 #include <cmath>
 #include <iostream>
+#include <exception>
 /* Les Constructeurs : */
 
 /* Initialisation d'un vecteur à partir d'une taille et d'un argument facultatif */
@@ -37,12 +38,18 @@ Dmatrix::~Dmatrix()
 }
 
 Dvector operator * (Dmatrix const &matrix, Dvector const& vector){
-  assert(matrix.columns() == vector.size()) ; 
+  //assert(matrix.columns() == vector.size()) ; 
+  if (matrix.columns() != vector.size()){
+    std::cout << "erreur cohérence taille vector // nombre colonnes" << std::endl ;
+    throw("") ;
+  }
+  else {
   Dvector vect = Dvector(matrix.lines(),0) ; 
   for (int i = 0; i < matrix.lines(); i++){
     vect(i) += matrix.line(i) * vector ;
   }
-  return vect ; 
+  return vect ;
+  }
 }
 
 double & Dmatrix::operator() (int i , int j){
@@ -54,32 +61,50 @@ const double & Dmatrix::operator() (int i , int j) const{
 }
 
 Dvector Dmatrix::line (int pos) const{
-  assert (pos >= 0 && pos < m) ;
+  //assert (pos >= 0 && pos < m) ;
+  if (pos < 0 || pos > m ){
+    std::cout << "position ligne trop grande ou trop petite" << std::endl ;
+    throw("") ;
+  }
+  else {
   Dvector line (n, 0.) ;
   for (int j = 0 ; j < n ; j++){
     line(j) = (*this)(pos, j) ;
   }
   return line ;
+  }
 }
 
 Dvector Dmatrix::column (int pos) const {
-  assert(pos >= 0 && pos < n);
+  //assert(pos >= 0 && pos < n);
+  if (pos < 0 || pos > n ){
+    std::cout << "position colonne trop grande ou trop petite" << std::endl ;
+    throw("") ;
+  }
+  else {
   Dvector column (m, 0.) ;
   for (int i = 0; i < m; i++){
     column(i) = (*this)(i,pos) ;
   }
   return column ;
+  }
 }
 
 Dmatrix operator * (Dmatrix const& matrix1, Dmatrix const& matrix2) {
-  assert(matrix1.columns() == matrix2.lines()) ; 
+  //assert(matrix1.columns() == matrix2.lines()) ; 
+  if (matrix1.columns() != matrix2.lines() ){
+    std::cout << "nombre collone mat1 différent nb ligne mat2" << std::endl ;
+    throw("") ;
+  }
+  else {
   Dmatrix mat = Dmatrix(matrix1.lines(), matrix2.columns(), 0) ; 
   for (int i = 0 ; i < matrix1.lines() ; i++){
     for (int j =0 ; j < matrix2.columns() ; j++){
       mat(i,j) = matrix1.line(i) * matrix2.column(j) ;
     }
   }
-  return mat ; 
+  return mat ;
+  }
 }
 
 
@@ -104,6 +129,11 @@ int Dmatrix::columns() const {
 Dmatrix& Dmatrix::transpose() {
   double a ;
   assert (n == m) ; 
+  if (n != m ){
+    std::cout << "tentative transposition matrice non carrée" << std::endl ;
+    throw("") ;
+  }
+  else {
   for  (int i =1 ; i < n ; i++){
     for (int j = 0 ; j < i ; j++){
       a = (*this)(i,j) ;
@@ -112,6 +142,7 @@ Dmatrix& Dmatrix::transpose() {
     }
   }
   return *this ;
+  }
 }
 
 Dmatrix Dmatrix::cholesky(){
