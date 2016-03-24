@@ -1,0 +1,7 @@
+Question 2 :
+Dvector operator+ (Dvector a, Dvector b) :
+- Le passage des arguments se fait par recopie.
+- La modification de a et b à l'intérieur de l'operateur ne modifie pas pour autant les arguments et ne lève aucune erreur.
+Dvector operator+ (const Dvector &a, const Dvector &b) :
+- Le passage se fait par référence, il n'y a pas de recopie.
+- Les arguments sont susceptible d'être modifié à l'interieur de l'operateur mais le const fait que le compilateur levera une erreur si c'est le cas.
