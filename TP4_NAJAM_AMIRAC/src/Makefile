@@ -6,18 +6,12 @@ LDFLAGS = #-lm -pg
 SRC = $(wildcard main*.cpp)
 SRC2 = $(wildcard *.cpp)
 BIN = $(patsubst %.cpp, bin/%, $(SRC))
-#OBJ = $(patsubst %.cpp, obj/%.o, $(SRC2))
 
 
-all : $(OBJ) bin
+all : $(BIN)
 
-bin : $(BIN)
-
-bin/main% : obj/Darray.o obj/Dvector.o obj/Dmatrix.o obj/main%.o
-	$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS) -fno-implicit-templates
-
-obj/%.o : %.cpp
-	$(CXX) -c $^ $(CXXFLAGS) $(LDFLAGS) -o $@
+bin/main% : main%.cpp
+	$(CXX) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)
 
 .PHONY : clean
 clean :

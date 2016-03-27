@@ -45,6 +45,18 @@ class Point
         */
         void transformer(double m11, double m12, double m21, double m22);
 
+        /** Methode permettant de deplacer un point. 
+        */
+        void deplacer(double dx, double dy);
+
+        /** Methode permettant de tourner un point d'un angle angle
+        */
+        void tourner(double angle, Point<T> const& pt);
+        
+        /** Methode permettant de calculer la distance entre le point courant et pt
+        */
+        T distance(Point<T> const& pt) const;
+
         /** Destructeur.
         */
         virtual ~Point();
@@ -57,6 +69,6 @@ class Point
 template<typename T>
 std::ostream& operator<<(std::ostream &flux, Point<T> const& point);
 
-#include "Point.cpp"
+#include "Point.txx"
 
 #endif // POINT_H

@@ -19,6 +19,11 @@ class Maillage
         */        
         Maillage(int m, int n, const Point<T>& origine);
 
+        /** Constructeur . \n
+            Initialise le maillage en triangle.
+        */ 
+        Maillage(const Point<T>& p1, const Point<T>& p2, const Point<T>& p3, const Point<T>& p4, int m, int n);
+
         /** Iterateur sur le début du conteneur
         */
         typename C<Triangle<T> >::const_iterator beginiter() const;
@@ -30,6 +35,14 @@ class Maillage
         /** Methode permettant de transformer un maillage 
         */
         void transformer(double m11, double m12, double m21, double m22);
+
+        /** Methode permettant de deplacer un maillage 
+        */
+        void deplacer(double dx, double dy);
+
+        /** Methode permettant de tourner un maillage d'un angle angle
+        */
+        void tourner(double angle, Point<T> const& pt);        
 
         /** Destructeur.
         */
@@ -45,6 +58,6 @@ template<typename T,
     template <typename, typename = std::allocator<Triangle<T> > > class C >
 std::ostream& operator<<(std::ostream &flux, Maillage<T,C> const& maillage);
 
-#include "Maillage.cpp"
+#include "Maillage.txx"
 
 #endif // MAILLAGE_H

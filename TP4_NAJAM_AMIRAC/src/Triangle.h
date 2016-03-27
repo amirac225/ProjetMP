@@ -31,9 +31,17 @@ class Triangle
         */
         Point<T> p3() const;  
 
-        /** Methode permettant de transformer un maillage
+        /** Methode permettant de transformer un triangle
         */
         void transformer(double m11, double m12, double m21, double m22);
+
+        /** Methode permettant de deplacer un triangle
+        */
+        void deplacer(double dx, double dy);
+        
+        /** Methode permettant de tourner un triangle d'un angle angle
+        */
+        void tourner(double angle, Point<T> const& pt);
 
         /** Destructeur.
         */
@@ -48,6 +56,6 @@ class Triangle
 template <typename T>
 std::ostream& operator<<(std::ostream &flux, Triangle<T> const& triangle);
 
-#include "Triangle.cpp"
+#include "Triangle.txx"
 
 #endif // TRIANGLE_H
