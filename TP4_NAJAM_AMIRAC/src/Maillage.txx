@@ -3,6 +3,7 @@
 #include "Transformer.h"
 #include "Deplacer.h"
 #include "Tourner.h"
+#include <iostream>
 //#include "Remplissage.h"
 #include <algorithm>
 
@@ -45,8 +46,8 @@ Maillage<T,C>::Maillage(const Point<T>& p1, const Point<T>& p2, const Point<T>& 
 	if(d3 != d2 || d1 != d4 || d1 == 0 || d2 == 0)
 		throw std::string("Dimension du rectangle incorrect !");
 	/* Possedant 4 angles droits : */
-	T a = (p2.x() - p1.x())*(p3.x() - p1.x());
-	T b = (p2.y() - p1.y())*(p3.y() - p1.y());
+	T a = (p2.x() - p1.x())*(p4.x() - p1.x());
+	T b = (p2.y() - p1.y())*(p4.y() - p1.y());
 	if(a + b != 0)
 		throw std::string("Ceci n'est pas un rectangle !");
 	T cos1 = (p2.x() - p1.x())/d1;
